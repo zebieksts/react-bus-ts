@@ -1,5 +1,5 @@
 {
-  "name": "react-bus",
+  "name": "react-bus-ts",
   "description": "A global event emitter for react.",
   "version": "0.0.1",
   "author": "Zebieksts",
