@@ -5,30 +5,33 @@ Useful if you need some user interaction in one place trigger an action in anoth
 
 ## Usage
 
-react-bus-ts contains a `<Provider />` component and a `withBus` decorator.
+react-bus-ts contains a `<ReactBusContext />` context and a `withBus` decorator.
 
-`<Provider />` creates an event emitter and places it on the context.
+`<ReactBusContext.Provider value={mitt()} />` creates an event emitter and places it on the context.
 `withBus()` takes the event emitter from context and passes it to the decorated component as the `bus` prop.
 
 ```js
-import { Provider, withBus } from 'react-bus-ts'
+import { ReactBusContext, withBus } from 'react-bus-ts'
+import mitt from 'mitt';
 // Inject `bus` prop to <Component />.
 const ConnectedComponent = withBus()(Component)
+const emitter=mitt();
 
-<Provider>
+<ReactBusContext.Provider value={emitter}>
   <ConnectedComponent />
-</Provider>
+</ReactBusContext.Provider>
 ```
 
-For example, to communicate "horizontally" between otherwise unrelated components:
+For example, to communicate "horizontally" between otherwise unrelated components. Context provider is optional - it is used to provide custom emitter instance.
+
 
 ```js
-import { Provider as BusProvider, withBus } from 'react-bus-ts'
+import { ReactBusContext, withBus } from 'react-bus-ts'
 const App = () => (
-  <BusProvider>
+  <div>
     <ScrollBox />
     <Input />
-  </BusProvider>
+  </div>
 )
 const ScrollBox = withBus()(class extends React.Component {
   onScroll = (top) => {
@@ -60,7 +63,7 @@ npm install react-bus-ts
 
 ## API
 
-### `<Provider />`
+### `<ReactBusContext.Provider value={emitter}>`
 
 Create an event emitter that will be available to all deeply nested child elements using the `withBus()` function.
 
