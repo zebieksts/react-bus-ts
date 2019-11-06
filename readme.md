@@ -1,23 +1,19 @@
 # react-bus-ts
 
-This is a typescript fork of [react-bus](https://github.com/goto-bus-stop/react-bus) package
-
-A global [event emitter](https://github.com/developit/mitt) for React apps.
+A global event emitter for React apps.
 Useful if you need some user interaction in one place trigger an action in another place on the page, such as scrolling a logging element when pressing PageUp/PageDown in an input element (without having to store scroll position in state).
 
 ## Usage
 
-react-bus-ts contains a `<Provider />` component and a `useBus` hook.
+react-bus-ts contains a `<Provider />` component and a `withBus` decorator.
 
 `<Provider />` creates an event emitter and places it on the context.
-`useBus()` returns the event emitter from context.
+`withBus()` takes the event emitter from context and passes it to the decorated component as the `bus` prop.
 
 ```js
-import { Provider, useBus } from 'react-bus-ts'
-// Use `bus` in <Component />.
-function ConnectedComponent () {
-  const bus = useBus()
-}
+import { Provider, withBus } from 'react-bus-ts'
+// Inject `bus` prop to <Component />.
+const ConnectedComponent = withBus()(Component)
 
 <Provider>
   <ConnectedComponent />
@@ -27,35 +23,31 @@ function ConnectedComponent () {
 For example, to communicate "horizontally" between otherwise unrelated components:
 
 ```js
-import { Provider as BusProvider, useBus, useListener } from 'react-bus-ts'
+import { Provider as BusProvider, withBus } from 'react-bus-ts'
 const App = () => (
   <BusProvider>
     <ScrollBox />
     <Input />
   </BusProvider>
 )
-
-function ScrollBox () {
-  const el = React.useRef(null)
-  const onscroll = React.useCallback(function (top) {
-    el.current.scrollTop += top
-  }, [])
-
-  useListener('scroll', onscroll)
-
-  return <div ref={el}></div>
-}
-
+const ScrollBox = withBus()(class extends React.Component {
+  onScroll = (top) => {
+    this.el.scrollTop += top
+  }
+  componentDidMount () { this.props.bus.on('scroll', this.onScroll) }
+  componentWillUnmount () { this.props.bus.off('scroll', this.onScroll) }
+  render () {
+    return <div ref={(el) => this.el = el}></div>
+  }
+})
 // Scroll the ScrollBox when pageup/pagedown are pressed.
-function Input () {
-  const bus = useBus()
+const Input = withBus()(({ bus }) => {
   return <input onKeyDown={onkeydown} />
-
   function onkeydown (event) {
     if (event.key === 'PageUp') bus.emit('scroll', -200)
     if (event.key === 'PageDown') bus.emit('scroll', +200)
   }
-}
+})
 ```
 
 This may be easier to implement and understand than lifting the scroll state up into a global store.
@@ -70,15 +62,11 @@ npm install react-bus-ts
 
 ### `<Provider />`
 
-Create an event emitter that will be available to all deeply nested child elements using the `useBus()` hook.
+Create an event emitter that will be available to all deeply nested child elements using the `withBus()` function.
 
-### `const bus = useBus()`
+### `withBus(name='bus')(Component)`
 
-Return the event emitter.
-
-### `useListener(name, fn)`
-
-Attach an event listener to the bus while this component is mounted. Adds the listener _after_ mount, and removes it before unmount.
+Wrap `Component` and inject the event emitter as a prop named `name`.
 
 ## License
 
