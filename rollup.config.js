@@ -1,4 +1,3 @@
-//import buble from 'rollup-plugin-buble'
 import typescript from 'rollup-plugin-typescript2'
 
 const meta = require('./package.json')
@@ -23,6 +22,5 @@ export default {
         }
       }
     }),
-  //  buble(),    
   ]
 }
