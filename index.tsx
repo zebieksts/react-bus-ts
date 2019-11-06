@@ -5,10 +5,10 @@ export function withBus(name = "bus") {
   return function decorate(BaseComponent) {
     const WithBus = props => (
       <ReactBusContext.Consumer>
-        {context =>
+        {emitter =>
           React.createElement(BaseComponent, {
             ...props,
-            [name]: context.reactBus
+            [name]: emitter
           })
         }
       </ReactBusContext.Consumer>
@@ -17,6 +17,4 @@ export function withBus(name = "bus") {
   };
 }
 
-export const ReactBusContext = React.createContext({
-  reactBus: mitt()
-});
+export const ReactBusContext = React.createContext(mitt());

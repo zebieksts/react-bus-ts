@@ -28,7 +28,7 @@ test("emits events on context", function(t) {
   var renderer = TestRenderer.create(
     h(
       ReactBusContext.Provider,
-      { value: { reactBus: mitt() } },
+      { value: mitt() },
       h("div", {}, h(Listener), h(Emitter))
     )
   );

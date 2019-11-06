@@ -1,7 +1,7 @@
 {
   "name": "react-bus-ts",
   "description": "A global event emitter for react.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Zebieksts",
   "bugs": {
     "url": "https://github.com/zebieksts/react-bus-ts/issues"
