@@ -1,10 +1,10 @@
 {
   "name": "react-bus",
   "description": "A global event emitter for react.",
-  "version": "2.0.1",
-  "author": "Renée Kooi <renee@kooi.me>",
+  "version": "0.0.1",
+  "author": "Zebieksts",
   "bugs": {
-    "url": "https://github.com/goto-bus-stop/react-bus/issues"
+    "url": "https://github.com/zebieksts/react-bus-ts/issues"
   },
   "dependencies": {
     "mitt": "^1.1.3"
@@ -22,7 +22,7 @@
     "tape": "^4.11.0",
     "typescript": "^3.7.0-beta"
   },
-  "homepage": "https://github.com/goto-bus-stop/react-bus#readme",
+  "homepage": "https://github.com/zebieksts/react-bus-ts#readme",
   "keywords": [
     "bus",
     "event-emitter",
@@ -36,7 +36,7 @@
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goto-bus-stop/react-bus.git"
+    "url": "git+https://github.com/zebieksts/react-bus-ts.git"
   },
   "scripts": {
     "build": "rollup -c",

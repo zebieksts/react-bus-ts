@@ -1,20 +1,19 @@
-# react-bus
+# react-bus-ts
 
-[![npm](https://badgen.net/npm/v/react-bus)](https://npmjs.com/package/react-bus)
-[![bundlephobia](https://badgen.net/bundlephobia/minzip/react-bus)](https://bundlephobia.com/result?p=react-bus)
+This is a typescript fork of [react-bus](https://github.com/goto-bus-stop/react-bus) package
 
 A global [event emitter](https://github.com/developit/mitt) for React apps.
 Useful if you need some user interaction in one place trigger an action in another place on the page, such as scrolling a logging element when pressing PageUp/PageDown in an input element (without having to store scroll position in state).
 
 ## Usage
 
-react-bus contains a `<Provider />` component and a `useBus` hook.
+react-bus-ts contains a `<Provider />` component and a `useBus` hook.
 
 `<Provider />` creates an event emitter and places it on the context.
 `useBus()` returns the event emitter from context.
 
 ```js
-import { Provider, useBus } from 'react-bus'
+import { Provider, useBus } from 'react-bus-ts'
 // Use `bus` in <Component />.
 function ConnectedComponent () {
   const bus = useBus()
@@ -28,7 +27,7 @@ function ConnectedComponent () {
 For example, to communicate "horizontally" between otherwise unrelated components:
 
 ```js
-import { Provider as BusProvider, useBus, useListener } from 'react-bus'
+import { Provider as BusProvider, useBus, useListener } from 'react-bus-ts'
 const App = () => (
   <BusProvider>
     <ScrollBox />
