@@ -63,7 +63,7 @@ This may be easier to implement and understand than lifting the scroll state up 
 ## Install
 
 ```
-npm install react-bus
+npm install react-bus-ts
 ```
 
 ## API
