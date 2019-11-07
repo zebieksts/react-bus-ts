@@ -1,6 +1,6 @@
 # react-bus-ts
 
-[![npm](https://badgen.net/npm/v/react-bus)](https://npmjs.com/package/react-bus-ts)
+[![npm](https://badgen.net/npm/v/react-bus-ts)](https://npmjs.com/package/react-bus-ts)
 
 It is TypeScript flavour fork of react-bus package which also has improved API based on new [React Context API](https://reactjs.org/docs/context.html).
 
