@@ -1,5 +1,9 @@
 # react-bus-ts
 
+[![npm](https://badgen.net/npm/v/react-bus)](https://npmjs.com/package/react-bus-ts)
+
+It is TypeScript flavour fork of react-bus package which also has improved API based on new [React Context API](https://reactjs.org/docs/context.html).
+
 A global event emitter for React apps.
 Useful if you need some user interaction in one place trigger an action in another place on the page, such as scrolling a logging element when pressing PageUp/PageDown in an input element (without having to store scroll position in state).
 
